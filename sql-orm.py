@@ -7,23 +7,23 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 
 # Create a connection to the database
 db = create_engine("postgresql:///chinook")  #/// indicate the default database hosted locally
-base = declarative_base()
+Base = declarative_base()
 
 # create a class for the "Artist" table
-class Artist(base):
+class Artist(Base):
     __tablename__ = 'Artist'
     ArtistId = Column(Integer, primary_key=True)
     Name = Column(String)
 
 # create a class for the "Album" table
-class Album(base):
+class Album(Base):
     __tablename__ = 'Album'
     AlbumId = Column(Integer, primary_key=True)
     Title = Column(String)
     ArtistId = Column(Integer, ForeignKey('Artist.ArtistId'))
 
 # create a class for the "Track" table
-class Track(base):
+class Track(Base):
     __tablename__ = 'Track'
     TrackId = Column(Integer, primary_key=True)
     Name = Column(String)
@@ -42,7 +42,7 @@ Session = sessionmaker(bind=db)
 session = Session()
 
 # create the database using declarative_base subclass
-base.metadata.create_all(db)
+Base.metadata.create_all(db)
 
 # query 1 - select all records from the 'Artist' table
 # artists = session.query(Artist)
