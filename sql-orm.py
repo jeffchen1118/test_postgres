@@ -1,5 +1,5 @@
 from sqlalchemy import (
-    create_engine, Table, Column, Integer, String, ForeignKey, Float
+    create_engine, Column, Integer, String, ForeignKey, Float
 )
 
 #from sqlalchemy.ext.declarative import declarative_base
