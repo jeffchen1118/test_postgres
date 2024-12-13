@@ -97,12 +97,45 @@ Chien_Chou_Chen = Programmer(
 #session.add(margaret_hamilton)
 #session.add(bill_gates)
 #session.add(time_burners_lee)
-session.add(Chien_Chou_Chen)
+#session.add(Chien_Chou_Chen)
 
 
 # commit the record to the database
-session.commit()
+#session.commit()
 
+# programmer = session.query(Programmer).filter_by(id=14).first()
+# programmer.famous_for = 'World President'
+
+# updating multiple records
+# people = session.query(Programmer)
+# for person in people:
+#     if person.gender == 'F':
+#         person.gender = "Female"
+#     elif person.gender == 'M':
+#         person.gender = "Male"
+#     else:
+#         print("Gender not defined")
+
+# session.commit()
+
+# delete a record
+fname = input("Enter first name: ")
+lname = input("Enter last name: ")
+programmer = session.query(Programmer).filter_by(first_name=fname, last_name=lname).first()
+#defensive programming
+if programmer is not None:
+    print("Programmer found: ", programmer.first_name + " " + programmer.last_name)
+    confirmation = input("Are you sure you want to delete this record? (y/n): ") 
+    if confirmation.lower() == 'y':
+        session.delete(programmer)
+        session.commit()
+        print("Programmer has been deleted")
+    else:
+        print("Programmer not deleted")
+        
+else:
+    print("No record found")
+    
 # query the database
 programmers = session.query(Programmer)
 for programmer in programmers:
